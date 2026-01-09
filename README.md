@@ -118,3 +118,7 @@ This project is maintained by a single developer and is provided as-is. While ca
 ## License
 
 MIT
+
+## Acknowledgments
+
+This project was built with significant contributions from [Claude Code](https://claude.ai/claude-code), Anthropic's AI coding assistant.
