@@ -1,0 +1,77 @@
+{{template "head" .}}
+
+<main class="container">
+    <!-- Project Description Section -->
+    <div class="card" style="margin-bottom: 24px; padding: 24px;">
+        <h2 style="margin-bottom: 12px; font-size: 18px;">About gitraf</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 12px;">
+            A lightweight, self-hosted git server. Simple, fast, and free from corporate control.
+        </p>
+        <p style="color: var(--text-secondary); font-size: 13px;">
+            This project is maintained by a single developer and is provided as-is.
+            While care is taken to ensure stability, bugs may exist.
+            <a href="https://github.com/RafayelGardishyan/gitraf" target="_blank">Contributions are always welcome!</a>
+        </p>
+    </div>
+
+    <h1 style="margin-bottom: 24px; font-size: 24px;">Repositories</h1>
+
+    {{if .Repos}}
+    <div class="card">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: var(--bg-secondary);">
+                    <th style="text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);">Name</th>
+                    <th style="text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);">Description</th>
+                    <th style="text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);">Visibility</th>
+                    <th style="text-align: right; padding: 12px 16px; border-bottom: 1px solid var(--border);">Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Repos}}
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px 16px;">
+                        <a href="/{{.Name}}" style="font-weight: 600;">{{.Name}}</a>
+                    </td>
+                    <td style="padding: 12px 16px; color: var(--text-secondary);">
+                        {{if .Description}}{{.Description}}{{else}}-{{end}}
+                    </td>
+                    <td style="padding: 12px 16px;">
+                        {{if .IsPublic}}
+                        <span class="badge badge-public">public</span>
+                        {{else}}
+                        <span class="badge badge-private">private</span>
+                        {{end}}
+                    </td>
+                    <td style="padding: 12px 16px; text-align: right; color: var(--text-secondary);">
+                        {{if not .LastCommit.IsZero}}
+                        {{.LastCommit.Format "Jan 2, 2006"}}
+                        {{else}}
+                        -
+                        {{end}}
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    {{else}}
+    <div style="text-align: center; padding: 48px; color: var(--text-secondary);">
+        <p>No repositories found.</p>
+        {{if not .IsTailnet}}
+        <p style="margin-top: 8px; font-size: 13px;">Connect via tailnet to see private repositories.</p>
+        {{end}}
+    </div>
+    {{end}}
+
+    <div class="status-bar" style="margin-top: 16px;">
+        {{len .Repos}} repositories
+        {{if .IsTailnet}}
+        (showing all)
+        {{else}}
+        (showing public only)
+        {{end}}
+    </div>
+</main>
+
+{{template "footer" .}}

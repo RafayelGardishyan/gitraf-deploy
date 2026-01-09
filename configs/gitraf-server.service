@@ -1,0 +1,12 @@
+[Unit]
+Description=Gitraf Web Server
+After=network.target docker.service
+
+[Service]
+Type=simple
+ExecStart=/opt/gitraf-server/gitraf-server --repos /opt/ogit/data/repos --port 8081 --templates /opt/gitraf-server/templates
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
