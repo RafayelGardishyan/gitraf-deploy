@@ -74,6 +74,28 @@ Everything in Tier 2, plus:
 
 If you prefer manual setup, see the individual scripts in the `scripts/` directory.
 
+## Rate Limiting
+
+The deployment includes nginx rate limiting to protect against abuse:
+
+| Endpoint | Rate | Burst |
+|----------|------|-------|
+| Web UI | 10 req/s | 20 |
+| Git operations | 2 req/s | 5 |
+| Connections per IP | 10 | - |
+
+Default rate limits are configured in the nginx configuration and can be customized by editing `/etc/nginx/nginx.conf`.
+
+## SSH Key Setup for GitHub Mirroring
+
+To enable GitHub mirroring from the web interface:
+
+1. Navigate to any repository settings page
+2. Under "GitHub Mirror", click "Generate SSH Key" if no key exists
+3. Copy the public key
+4. Add it to your [GitHub SSH keys](https://github.com/settings/keys)
+5. Configure the mirror URL and enable mirroring
+
 ## Post-Installation
 
 After installation, configure the gitraf CLI on your local machine:

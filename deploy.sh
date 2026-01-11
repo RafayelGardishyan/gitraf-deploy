@@ -24,6 +24,13 @@ DOMAIN=""
 TAILNET_URL=""
 EMAIL=""
 
+# Rate limiting defaults
+RATE_LIMIT_GENERAL="10r/s"
+RATE_LIMIT_GENERAL_BURST="20"
+RATE_LIMIT_GIT="2r/s"
+RATE_LIMIT_GIT_BURST="5"
+MAX_CONNECTIONS_PER_IP="10"
+
 # Paths
 OGIT_DIR="/opt/ogit"
 GITRAF_SERVER_DIR="/opt/gitraf-server"
